@@ -287,7 +287,14 @@ namespace OS_Assignment_1
 
                 t2 += t1;
                 t1 = Convert.ToDouble(NamBurst[sortedDict.First().Key]);
-
+                if (t1 > q_interval)
+                {
+                    int rem = 0;
+                    remaining_time.Add((t1 - q_interval));
+                    NamRemTime.Add(sortedDict.First().Key,remaining_time[rem]);
+                    t1 = q_interval;
+                    rem++;
+                }
                 if (temp == (process_name.Count - 1))
                 {
                     AvgWt = t2 / process_name.Count;
@@ -299,7 +306,20 @@ namespace OS_Assignment_1
                 sortedDict = null;
                 temp++;
             } while (temp < process_name.Count);
-
+            if (temp == process_name.Count)
+            {
+                for (int rm = 0; rm < remaining_time.Count; rm++)
+                {
+                    double rrrr=t2; 
+                    rrrr+= t1;
+                    t2 += rrrr;
+                    stackBar(zedGraphControl1, NamRemTime.First().Key.ToString(),
+                        double.Parse(remaining_time[0].ToString()));
+                    AvgWt = t2 / process_name.Count;
+                    NamRemTime.Remove(NamRemTime.First().Key);
+                    remaining_time.Remove(remaining_time[0]);
+                }
+            }
             label31.Text = AvgWt.ToString(); 
         }
         //Priority non-preemptive function
