@@ -1,1 +1,10 @@
 C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\bin\Release\OS Assignment 1.exe.config
+C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\bin\Release\OS Assignment 1.exe
+C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\bin\Release\OS Assignment 1.pdb
+C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\bin\Release\ZedGraph.dll
+C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\obj\Release\OS_Assignment_1.Form1.resources
+C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\obj\Release\OS_Assignment_1.Properties.Resources.resources
+C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\obj\Release\OS Assignment 1.csproj.GenerateResource.Cache
+C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\obj\Release\OS Assignment 1.exe
+C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\obj\Release\OS Assignment 1.pdb
+C:\Users\IAA\Documents\Visual Studio 2012\Projects\OS Assignment 1\OS Assignment 1\obj\Release\OS Assignment 1.csprojResolveAssemblyReference.cache
