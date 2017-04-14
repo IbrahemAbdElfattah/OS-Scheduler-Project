@@ -35,6 +35,7 @@ namespace OS_Assignment_1
 
         double AvgWt;
         string num;
+        double t1 = 0, temp = 0, t2;
 
         public Form1()
         {
@@ -83,7 +84,7 @@ namespace OS_Assignment_1
                     break;
                 case "SJF (non-Preemptive)":
                     textBox5.Enabled = true;
-                    textBox2.Enabled = true;
+                    textBox2.Enabled = false;
                     textBox3.Enabled = false;
                     textBox4.Enabled = true;
                     textBox6.Enabled = false;
@@ -150,8 +151,8 @@ namespace OS_Assignment_1
                     do {
                         process_name.Add(textBox5.Text);
                         Burst_time.Add(int.Parse(textBox4.Text));
-                        Arrival_time.Add(int.Parse(textBox2.Text));
-                        NamArriv.Add(process_name[k], Arrival_time[k]);
+                        //Arrival_time.Add(int.Parse(textBox2.Text));
+                        //NamArriv.Add(process_name[k], Arrival_time[k]);
                         NamBurst.Add(process_name[k], Burst_time[k]);
                         k++;
                         break;
@@ -163,7 +164,7 @@ namespace OS_Assignment_1
                         Burst_time.Add(int.Parse(textBox4.Text));
                         Priority_Number.Add(int.Parse(textBox3.Text));
                         NamBurst.Add(process_name[l], Burst_time[l]);
-                        NamRemTime.Add(process_name[l], Priority_Number[l]);
+                        Nampriority.Add(process_name[l], Priority_Number[l]);
                         l++;
                         break;
                     } while (l < process_name.Count);
@@ -174,7 +175,7 @@ namespace OS_Assignment_1
                         Burst_time.Add(int.Parse(textBox4.Text));
                         Priority_Number.Add(int.Parse(textBox3.Text));
                         NamBurst.Add(process_name[m], Burst_time[m]);
-                        NamRemTime.Add(process_name[m], Priority_Number[m]);
+                        Nampriority.Add(process_name[m], Priority_Number[m]);
                         m++;
                         break;
                     } while (m < process_name.Count);
@@ -206,61 +207,128 @@ namespace OS_Assignment_1
             {
 
                 case "FCFS":
-                    fcfs(zedGraphControl1);
-                break;
+                    fcfs();
+                    break;
                 case "SJF (Preemptive)":
                     
                     break;
                 case "SJF (non-Preemptive)":
-                    
+                    SJF_nP();
                     break;
                 case "Priority (Preemptive)":
                     
                     break;
                 case "Priority (non-Preemptive)":
-                    
+                    Priority_nP();
                     break;
                 case "Round Robin (RR)":
-                    
+                    RR();
                     break;
             }
         }
 
 
         
-        double t1=0,temp=0,t2;
-        public void fcfs(ZedGraphControl zgc) 
+        //FCFS Funcion
+        public void fcfs() 
         {
-            
-            
-
             do
             {
-
                 var sortedDict = from entry in NamArriv orderby entry.Value ascending select entry;
-
 
                 t2 += t1;
                 t1 = Convert.ToDouble(NamBurst[sortedDict.First().Key]);
                 
-                // ---------------------
-                stackBar(zgc, sortedDict.First().Key.ToString(), t1);
+                if (temp == (process_name.Count - 1))
+                {
+                    AvgWt = t2 / process_name.Count;
+                }
+
+                stackBar(zedGraphControl1, sortedDict.First().Key.ToString(), t1);
+
+                NamArriv.Remove(sortedDict.First().Key);
+                sortedDict = null;
+                temp++;
+            } while (temp < process_name.Count);
+
+            label31.Text = AvgWt.ToString();
+        }
+        //SJF non-preemptive Function
+        public void SJF_nP() 
+        {
+
+            do
+            {
+                var sortedDict = from entry in NamBurst orderby entry.Value ascending select entry;
+
+                t2 += t1;
+                t1 = Convert.ToDouble(NamBurst[sortedDict.First().Key]);
 
                 if (temp == (process_name.Count - 1))
                 {
                     AvgWt = t2 / process_name.Count;
                 }
-                ////
-                //if (process_name.Count == 1) { AvgWt = 0; }
-                //else { AvgWt = t2 / process_name.Count; }
+
+                stackBar(zedGraphControl1, sortedDict.First().Key.ToString(), t1);
+
+                NamBurst.Remove(sortedDict.First().Key);
+                sortedDict = null;
+                temp++;
+            } while (temp < process_name.Count);
+
+            label31.Text = AvgWt.ToString();
+        }
+        //Round Robin Function
+        public void RR()
+        {
+            do
+            {
+                var sortedDict = from entry in NamArriv orderby entry.Value ascending select entry;
+
+                t2 += t1;
+                t1 = Convert.ToDouble(NamBurst[sortedDict.First().Key]);
+
+                if (temp == (process_name.Count - 1))
+                {
+                    AvgWt = t2 / process_name.Count;
+                }
+
+                stackBar(zedGraphControl1, sortedDict.First().Key.ToString(), t1);
+
                 NamArriv.Remove(sortedDict.First().Key);
                 sortedDict = null;
                 temp++;
             } while (temp < process_name.Count);
-            
-            label31.Text = AvgWt.ToString();
 
+            label31.Text = AvgWt.ToString(); 
         }
+        //Priority non-preemptive function
+        public void Priority_nP()
+        {
+            do
+            {
+                var sortedDict = from entry in Nampriority orderby entry.Value ascending select entry;
+
+                t2 += t1;
+                t1 = Convert.ToDouble(NamBurst[sortedDict.First().Key]);
+
+                if (temp == (process_name.Count - 1))
+                {
+                    AvgWt = t2 / process_name.Count;
+                }
+
+                stackBar(zedGraphControl1, sortedDict.First().Key.ToString(), t1);
+
+                Nampriority.Remove(sortedDict.First().Key);
+                sortedDict = null;
+                temp++;
+            } while (temp < process_name.Count);
+
+            label31.Text = AvgWt.ToString();
+        }
+
+
+
         GraphPane myPane = new GraphPane();
         public void creatGraph(ZedGraphControl zgc)
         {
